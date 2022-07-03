@@ -1,6 +1,7 @@
 # coding:utf-8
 import requests
 from io import BytesIO
+import os
 from pilmoji import Pilmoji
 from pilmoji.source import MicrosoftEmojiSource
 from PIL import Image, ImageDraw, ImageFont
@@ -25,9 +26,13 @@ def _save_avatar(user_id: int) -> str:
     """
     获取用户头像
     """
-    url = AVATAR_URL.format(user_id)
     save_url = LOCAL_AVATAR_URL.format(user_id)
-    r = requests.get(url)
+    # check local cache
+    if os.path.exists(save_url):
+        # if within 24 hours, return local cache
+        if time() - os.path.getmtime(save_url) < 24 * 60 * 60:
+            return save_url
+    r = requests.get(AVATAR_URL.format(user_id))
     if r.status_code != 200:
         return None
     with open(save_url, "wb") as f:

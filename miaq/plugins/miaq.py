@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
-from nonebot import on_command, on_keyword, on_message
+from io import BytesIO
+from os import path
+from nonebot import on_command, on_keyword
 from nonebot.rule import to_me, keyword
 from nonebot.adapters.onebot.v11 import MessageSegment, Bot, Event
 from nonebot.log import logger
@@ -13,9 +15,11 @@ reply_rule = keyword('整个活', '整活', 'makeitaquote')
 
 makeitaquote_cmd = on_command("makeitaquote", rule=to_me(), aliases={"整个活", "整活"}, priority=5)
 makeitaquote_msg = on_keyword(["黄鸭"], rule=reply_rule, priority=10)
+yiyanwannian = on_command("yiyanwannian", rule=to_me(), aliases={"一眼万年"}, priority=15)
 
+yywn_bio = BytesIO(open("./henhuo/yiyanwannian.jpg", "rb").read())
 henhuo = []
-with open('henhuo.txt', 'r', encoding='utf-8') as f:
+with open('henhuo/henhuo.txt', 'r', encoding='utf-8') as f:
     henhuo = f.readlines()
 
 if henhuo == []:
@@ -29,8 +33,6 @@ async def handler(makeitaquote, event: Event):
             return
         logger.info(event.dict())
         reply = await extract_reply(event.dict())
-        if reply.message == '':
-            await makeitaquote.finish(event, random.choice(henhuo))
         logger.info("{}, {}, {}".format(reply.user_id, reply.user_card, reply.message))
         imageio = generate(reply)
         await makeitaquote.send("草！走！忽略！ጿ ኈ ቼ ዽ ጿ")
@@ -48,3 +50,8 @@ async def handle_first_receive(bot: Bot, event: Event):
 @makeitaquote_msg.handle()
 async def handle_first_receive(bot: Bot, event: Event):
     await handler(makeitaquote_msg, event)
+
+
+@yiyanwannian.handle()
+async def yywn_receive(bot: Bot, event: Event):
+    await yiyanwannian.finish(MessageSegment.image(yywn_bio))
