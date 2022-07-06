@@ -7,7 +7,7 @@ from pilmoji.source import MicrosoftEmojiSource
 from PIL import Image, ImageDraw, ImageFont
 from time import localtime, strftime, time
 import math
-import textwrap
+import cjk_textwrap
 
 from miaq.plugins.reply import Reply
 
@@ -67,7 +67,7 @@ def wrap_text(text: str, width: int) -> list:
     text = text.replace("\r\n", "\n")
     lines = []
     for line in text.split("\n"):
-        lines.extend(textwrap.wrap(line, width))
+        lines.extend(cjk_textwrap.wrap(line, width))
     return lines
 
 
