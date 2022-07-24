@@ -2,7 +2,7 @@
 
 ![example](assets/114514-emoji-multiline-line.jpg)
 
-使用nonebot2+go-cqhttp开发，自动生成makeitaquote卡片的qq机器人，限定python版本3.9+。
+使用nonebot2+go-cqhttp开发，自动生成makeitaquote卡片的qq机器人（现版本已经加入了很多很多新功能），限定python版本3.9+。
 
 ## 部署
 
@@ -61,4 +61,4 @@ emoji文本支持（部分）
 ## Third Party
 
 - 思源黑体
-- [《东百往事》全台词](https://www.bilibili.com/read/cv8179289/)
+- 由于数据集、语录涉及各种license问题，请找作者索要

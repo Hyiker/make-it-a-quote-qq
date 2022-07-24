@@ -1,6 +1,5 @@
 import nonebot
 from nonebot.adapters.onebot.v11.adapter import Adapter as OBV11Adapter
-
 from os import path
 
 nonebot.init()

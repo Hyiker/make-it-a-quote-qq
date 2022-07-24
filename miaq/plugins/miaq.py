@@ -14,7 +14,7 @@ from .generate_image import generate
 reply_rule = keyword('整个活', '整活', 'makeitaquote')
 
 makeitaquote_cmd = on_command("makeitaquote", rule=to_me(), aliases={"整个活", "整活"}, priority=5)
-makeitaquote_msg = on_keyword(["黄鸭"], rule=reply_rule, priority=10)
+makeitaquote_msg = on_keyword(["黄鸭"], rule=reply_rule, priority=15)
 yiyanwannian = on_command("yiyanwannian", rule=to_me(), aliases={"一眼万年"}, priority=15)
 
 yywn_bio = BytesIO(open("./henhuo/yiyanwannian.jpg", "rb").read())
